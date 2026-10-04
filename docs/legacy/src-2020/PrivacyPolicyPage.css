@@ -1,0 +1,25 @@
+.privacyPolicy-container {
+    padding-top: 5px;
+}
+
+.privacyPolicy .appPage-paper {
+    margin-top: 5px;
+}
+
+.privacy-policy > h2 {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.privacy-policy section {
+    margin-top: 20px;
+}
+
+.privacy-policy .emailDescription {
+    margin-bottom: 5px;
+}
+
+.privacy-policy .email {
+    margin-left: 15px;
+    font-weight: 600;
+}

@@ -1,0 +1,27 @@
+#contact {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    font-family: "thunder";
+    font-size: 30px;
+    /* padding: 0 0 80px 0; */
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+#contact .appPage-paper {
+    margin-top: 15px;
+}
+
+#contact .appPage-paper > p {
+    text-align: center;
+    font-family: "specialelite";
+    padding: 15px 0;
+}
+
+#contact .container {
+    text-align: center;
+    font-family: "specialelite";
+    padding: 15px 0;
+    font-size: 18px;
+}

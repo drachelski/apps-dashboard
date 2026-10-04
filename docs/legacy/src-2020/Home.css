@@ -1,0 +1,13 @@
+.app-logo {
+    
+}
+
+.parallax {
+  /* height: 50%; */
+  height: 500px;
+  background-image: url('./imgs/fingerprints.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

@@ -1,0 +1,73 @@
+.appPage {}
+
+
+@media (max-width: 640px) {
+    .appPage-paper-title {
+        font-size: 22px !important;
+    }
+}
+
+@media (min-width: 640px) {
+    .appPage-paper-title {
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 980px) {
+    .appPage-paper-title {
+        font-size: 34px;
+    }
+}
+
+
+
+.appPage-buttons {
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.appPage-privacyPolicyButton {
+    background-color: #692f88;
+}
+
+.appPage-playStoreButton {
+    height: 36px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.appPage-banner {
+    border-radius: 4px;
+    padding-top: 5px;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.appPage-banner > img {
+    width: 100vw;
+    object-fit: cover;
+}
+
+.appPage-paper {
+    background-color: #2d2d2d !important;
+    color: #e2e2e2 !important;
+    padding: 5px 10px;
+}
+
+.appPage-paper > h2 {
+    padding-bottom: 10px;
+    text-align: center;
+    font-family: "thunder" !important;
+}
+
+.appPage-paper > p {
+    text-align: justify;
+}
+
+.appPage-paper-descriptionPart {
+    padding-bottom: 5px;
+}

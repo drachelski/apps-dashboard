@@ -1,0 +1,21 @@
+.appsListContainer {
+    color: aliceblue;
+}
+
+.appsAndGamesTitle {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "thunder";
+    font-size: 30px;
+    padding: 46px 0;
+}
+
+.appsAndGamesTitle .title {
+    font-size: 30px;
+}
+
+.appsAndGamesTitle .subtitle {
+    font-size: 14px;
+}

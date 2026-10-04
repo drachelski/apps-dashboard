@@ -1,0 +1,70 @@
+
+.promo-carousel-container .carousel-item {
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .promo-carousel-container .carousel-caption h3 {
+        font-size: 12px;
+    }
+    
+    .promo-carousel-container .carousel-caption p {
+        font-size: 10px;
+    }
+
+    .promo-carousel-container .carousel-caption {
+        padding: 5px 0 5px 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .promo-carousel-container .carousel-caption h3 {
+        font-size: 14px;
+    }
+    
+    .promo-carousel-container .carousel-caption p {
+        font-size: 12px;
+    }
+
+    .promo-carousel-container .carousel-caption {
+        padding: 5px 0 5px 0;
+    }
+}
+
+@media (min-width: 640px) {
+    .promo-carousel-container .carousel-caption h3 {
+        font-size: 18px;
+    }
+
+    .promo-carousel-container .carousel-caption p {
+        font-size: 14px;
+    }
+
+    .promo-carousel-container .carousel-caption {
+        padding: 8px 0 8px 0;
+    }
+}
+  
+@media (min-width: 980px) {
+    .promo-carousel-container .carousel-caption h3 {
+        font-size: 22px;
+    }
+
+    .promo-carousel-container .carousel-caption p {
+        font-size: 18px;
+    }
+
+    .promo-carousel-container .carousel-caption {
+        padding: 10px 0 10px 0;
+    }
+}
+  
+@media (min-width: 1400px) {
+    .promo-carousel-container .carousel-caption h3 {
+        font-size: 28px;
+    }
+    
+    .promo-carousel-container .carousel-caption p {
+        font-size: 22px;
+    }
+}

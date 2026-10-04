@@ -1,0 +1,26 @@
+.navBarComponent > .navbar {
+    background-color: #2d2d2d !important;
+}
+
+.navBarComponent > .navbar > .container {
+    margin: 9px 25px;
+}
+
+.nav-link {
+    color: #dcdcdc !important;
+    font-family: "thunder";
+    /* font-family: "specialelite"; */
+}
+
+.nav-link:hover {
+    color: #ffffff8c !important;
+}
+
+.ntwins-brand {
+    color: #dcdcdc !important;
+    font-family: "thunder";
+}
+
+.ntwins-brand:hover {
+    color: #ffffff8c !important;
+}
