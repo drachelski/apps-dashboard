@@ -127,6 +127,56 @@ async function logo() {
     .toFile(path.join(OUT, 'logo-ntwins.webp'));
 }
 
+const FAVICON_BG = '#0f0c14';
+const FAVICON_FG = { r: 0xf5, g: 0xb5, b: 0x24 };
+const FAVICON_GLYPH_SCALE = 0.78;
+
+// Alpha mask of the first two letters ("nt") of the generated logo, split on empty columns.
+async function ntMask() {
+  const logoFile = path.join(OUT, 'logo-ntwins.webp');
+  const { data, info } = await sharp(logoFile).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const hasInk = (x) => {
+    for (let y = 0; y < info.height; y++) if (data[(y * info.width + x) * 4 + 3] > 40) return true;
+    return false;
+  };
+  const glyphs = [];
+  for (let x = 0, start = -1; x <= info.width; x++) {
+    const ink = x < info.width && hasInk(x);
+    if (ink && start < 0) start = x;
+    if (!ink && start >= 0) {
+      glyphs.push([start, x - 1]);
+      start = -1;
+    }
+  }
+  if (glyphs.length < 2) throw new Error('Could not find "nt" glyphs in the logo');
+  const [[left], [, right]] = glyphs;
+  // sharp runs operations in a fixed order, so crop, extract alpha and trim in separate passes
+  const crop = await sharp(logoFile)
+    .extract({ left, top: 0, width: right - left + 1, height: info.height })
+    .png()
+    .toBuffer();
+  const alpha = await sharp(crop).extractChannel('alpha').png().toBuffer();
+  return sharp(alpha).trim({ background: '#000000' }).png().toBuffer();
+}
+
+// Gold "nt" (cut from the logo) on the dark page background; rounded unless the platform rounds itself.
+async function favicon(mask, size, file, { rounded }) {
+  const glyphMask = await sharp(mask)
+    .resize({ width: Math.round(size * FAVICON_GLYPH_SCALE), height: Math.round(size * FAVICON_GLYPH_SCALE), fit: 'inside' })
+    .toBuffer();
+  const { width, height } = await sharp(glyphMask).metadata();
+  const glyph = await sharp({ create: { width, height, channels: 3, background: FAVICON_FG } })
+    .joinChannel(glyphMask)
+    .png()
+    .toBuffer();
+  const radius = rounded ? Math.round(size * 0.22) : 0;
+  const background = `<svg width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${radius}" fill="${FAVICON_BG}"/></svg>`;
+  await sharp(Buffer.from(background))
+    .composite([{ input: glyph, gravity: 'center' }])
+    .png()
+    .toFile(path.join(ROOT, 'src/app', file));
+}
+
 async function main() {
   for (const dir of ['icons', 'banners', `screens/${DP2_SLUG}/thumb`, `screens/${DP2_SLUG}/full`]) {
     await mkdir(path.join(OUT, dir), { recursive: true });
@@ -143,8 +193,10 @@ async function main() {
 
   await logo();
 
-  // Next.js picks up app/icon.png as the favicon (with basePath) — avoids a /favicon.ico 404.
-  await sharp(DP2_ICON).resize(256, 256).png().toFile(path.join(ROOT, 'src/app/icon.png'));
+  // Next.js picks up app/icon.png and app/apple-icon.png (with basePath) — avoids a /favicon.ico 404.
+  const mask = await ntMask();
+  await favicon(mask, 256, 'icon.png', { rounded: true });
+  await favicon(mask, 180, 'apple-icon.png', { rounded: false });
 
   console.log('optimize-images: done');
 }

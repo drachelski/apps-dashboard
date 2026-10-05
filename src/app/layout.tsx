@@ -20,12 +20,18 @@ export const viewport: Viewport = { themeColor: '#0f0c14' };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`}>
+    // suppressHydrationWarning: browser extensions (e.g. Grammarly) add attributes to <html>/<body>
+    // before React hydrates. It only silences attribute diffs on these two elements, not their children.
+    <html
+      lang="en"
+      className={`${fontBody.variable} ${fontDisplay.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <noscript dangerouslySetInnerHTML={{ __html: `<style>${NOSCRIPT_REVEAL_CSS}</style>` }} />
         <style dangerouslySetInnerHTML={{ __html: REVEAL_FAILSAFE_CSS }} />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
